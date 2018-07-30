@@ -1,0 +1,47 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "shx rm -rf public/** && NODE_ENV=production webpack -p --progress",
+    "lint": "eslint --ext .js,.jsx src/",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "webpack-dev-server",
+    "test": "NODE_ENV=test jest"
+  },
+  "dependencies": {
+    "browser-cookies": "^1.2.0",
+    "deepmerge": "^2.1.1",
+    "fs": "0.0.1-security",
+    "jss": "^9.8.7",
+    "jss-preset-default": "^4.5.0",
+    "preact": "^8.2.9",
+    "preact-dom": "^1.0.1",
+    "preact-jss": "^1.0.0",
+    "preact-markup": "^1.6.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-preact": "^1.1.6",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "html-webpack-plugin": "^2.28.0",
+    "shx": "^0.2.2",
+    "webpack": "^2.2.1",
+    "webpack-config-utils": "^2.3.0",
+    "webpack-dev-server": "^2.4.1"
+  }
+}
