@@ -1,9 +1,17 @@
 import { h, Component } from 'preact';
 import cookies from 'browser-cookies';
 import injectSheet from 'preact-jss';
+import Markup from 'preact-markup';
 
 import Styles from '../../styles';
 import style from './style';
+
+function parseSize(size) {
+  if (!size) {
+    return size;
+  }
+  return size.includes('px') || size.includes('%') ? size : `${size}px`;
+}
 
 class BlockedIframe extends Component {
   constructor(props) {
@@ -50,7 +58,7 @@ class BlockedIframe extends Component {
   render() {
     const { blocked, category } = this.state;
     const {
-      children, type, sheet: { classes }, tab, ...props
+      children, type, sheet: { classes }, tab, text, button, ...props
     } = this.props;
     let tabName;
     if (tab) {
@@ -64,12 +72,12 @@ class BlockedIframe extends Component {
     }
 
     return (
-      <div className={classes.root} style={{ width: props.width, height: props.height }} >
-        <h2>
-          {`This content is blocked because you didn't accept ${tabName}. If you want to see this content, please allow it.`}
+      <div className={classes.root} style={{ width: parseSize(props.width), height: parseSize(props.height) }} >
+        <h2 className={classes.text}>
+          <Markup markup={text} />
         </h2>
         <button type='button' onClick={() => { this.allowCookies(category); }} >
-          {`Allow ${tabName}`}
+          {`${button} ${tabName}`}
         </button>
       </div>
     );

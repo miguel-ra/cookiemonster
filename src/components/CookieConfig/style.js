@@ -30,7 +30,7 @@ const style = (theme) => ({
     transform: 'translate(-50%, -50%)',
     maxWidth: '50em',
     width: '90vw',
-    minHeight: '50vh',
+    minHeight: '40vh',
     color: theme.color,
     backgroundColor: theme.backgroundColor,
     display: 'flex',

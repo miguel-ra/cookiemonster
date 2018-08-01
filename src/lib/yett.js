@@ -14,7 +14,7 @@ let blackListedScripts = [];
 
 let observer;
 
-export default function (blacklist, blacklistTypes, tabs) {
+export default function (blacklist, blacklistTypes, { tabs, blockedIframeText, acceptOne }) {
   blacklistedTabs = tabs;
   blacklistedTypes = blacklistTypes;
   blacklistedPatterns = blacklist;
@@ -46,6 +46,35 @@ export default function (blacklist, blacklistTypes, tabs) {
     }, {})) || {}
   );
 
+  const blockIframe = (iframeNode) => {
+    const type = getType(iframeNode.getAttribute('src'));
+    if (type) {
+      let nodeToReplace = iframeNode;
+
+      while (nodeToReplace.parentElement && nodeToReplace.parentElement.className === 'blockediframe') {
+        nodeToReplace = nodeToReplace.parentElement;
+      }
+
+      if (nodeToReplace.parentElement) {
+        const container = document.createElement('span');
+        container.className = 'blockediframe';
+
+        nodeToReplace.parentElement.replaceChild(container, nodeToReplace);
+
+        render(
+          <BlockedIframe
+            {...fetchAttributes(iframeNode)}
+            type={type}
+            tab={blacklistedTabs[type]}
+            text={blockedIframeText}
+            button={acceptOne}
+          />,
+          container
+        );
+      }
+    }
+  };
+
   /* 1st part - setup a mutation observer to track DOM insertion */
 
   observer = new MutationObserver((mutations) => {
@@ -53,8 +82,6 @@ export default function (blacklist, blacklistTypes, tabs) {
       for (let i = 0; i < addedNodes.length; i += 1) {
         const node = addedNodes[i];
         // For each added script tag
-        console.log(node);
-
         if (node.nodeType === 1 && node.tagName === 'SCRIPT') {
           const src = node.src || '';
           const { type, text } = node;
@@ -87,27 +114,13 @@ export default function (blacklist, blacklistTypes, tabs) {
             loadScript(copiedNode);
           }
         } if (node.nodeType === 1 && node.tagName === 'IFRAME' && needsToBeBlacklisted(node.getAttribute('src'))) {
-          const type = getType(node.getAttribute('src'));
-          if (type) {
-            let nodeToReplace = node;
-
-            while (nodeToReplace.parentElement.className === 'blockediframe') {
-              nodeToReplace = nodeToReplace.parentElement;
+          blockIframe(node);
+        } else if (node.querySelector) {
+          const iframeList = node.querySelectorAll('iframe');
+          for (let j = 0; j < iframeList.length; j += 1) {
+            if (needsToBeBlacklisted(iframeList[j].getAttribute('src'))) {
+              blockIframe(iframeList[j]);
             }
-
-            const container = document.createElement('span');
-            container.className = 'blockediframe';
-
-            nodeToReplace.parentElement.replaceChild(container, nodeToReplace);
-
-            render(
-              <BlockedIframe
-                {...fetchAttributes(node)}
-                type={type}
-                tab={blacklistedTabs[type]}
-              />,
-              container
-            );
           }
         }
       }
@@ -204,8 +217,6 @@ const loadScript = (script) => {
 
 export const unblock = (...scriptUrls) => {
   if (disableBlocker) return;
-
-  observer.disconnect();
 
   if (!scriptUrls || scriptUrls.length < 1) {
     disableBlocker = true;

@@ -14,9 +14,11 @@ jss.setup(preset());
 const defaultParams = {
   tabs: {},
   cookies: {},
+  blockedIframeText: 'This content is blocked because you didn\'t accept this specific cookie. If you want to see this content, please allow it.',
   alertText: 'This website uses cookies to ensure you get the best experience on our website.',
   moreInformation: 'Cookie settings',
   acceptAll: 'Allow all cookies',
+  acceptOne: 'Allow',
 };
 
 
@@ -40,7 +42,7 @@ function cookieMonster(params) {
   const { blackList, blackListTypes, cookieNames } = parseParams(mergedParams);
 
   localcookie(cookieNames);
-  yett(blackList, blackListTypes, params.tabs);
+  yett(blackList, blackListTypes, mergedParams);
   cookiemonster();
 
   if (Object.keys(mergedParams.tabs).length === 0) {

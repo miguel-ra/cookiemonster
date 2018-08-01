@@ -45,7 +45,7 @@ class App extends Component {
 
   updateCookieMonsterState() {
     const { params } = this.props;
-    const { saved, ...cookiemonster } = getTabCookie(params.tabs, JSON.parse(cookies.get('cookiemonster')));
+    const { saved, ...cookiemonster } = getTabCookie(params.tabs, JSON.parse(cookies.get('cookiemonster')), false);
 
     this.saveCookie(cookiemonster, false);
 

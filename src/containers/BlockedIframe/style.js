@@ -5,11 +5,11 @@ const style = (theme) => ({
     backgroundColor: theme.accent.backgroundColor,
     color: theme.accent.color,
     boxSizing: 'border-box',
-    padding: '5% 10%',
+    padding: '5%',
     display: 'flex',
     textAlign: 'center',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     flexDirection: 'column',
     '& button': {
       transition: 'all .2s ease-in-out',
@@ -31,6 +31,10 @@ const style = (theme) => ({
         textDecoration: 'underline',
       },
     },
+  },
+  text: {
+    marginBottom: '2em',
+    color: theme.accent.color,
   },
 });
 

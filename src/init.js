@@ -1,3 +1,4 @@
+/* Example of cookieMonster init, this file it's only used when development mode is active */
 /* eslint-disable */
 cookieMonster.init(
   {
@@ -9,7 +10,7 @@ cookieMonster.init(
     tabs: {
       privacy: {
         title: 'Your Privacy',
-        description: 'Any web site that you visit may store or retrieve information on your browser, mostly through the use of cookies. The stored or retrieved information might be about you, your preferences or your device and is mostly used to make the site work as you expect it to. The information does not usually directly identify you, but aims at giving you a more personalized web experience. Because we respect your right to privacy, you can choose not to allow some types of cookies. Click on the different category headings to find out more and change our default settings.<br />We process your personal data in accordance with the applicable Accenture Policy (<a href="https://www.accenture.com/gb-en/privacy-policy">https://www.accenture.com/gb-en/privacy-policy</a>) and may transfer personal data to our contracted service providers who may be located in other countries (outside EEA).',
+        description: 'Any web site that you visit may store or retrieve information on your browser, mostly through the use of cookies. The stored or retrieved information might be about you, your preferences or your device and is mostly used to make the site work as you expect it to. The information does not usually directly identify you, but aims at giving you a more personalized web experience. Because we respect your right to privacy, you can choose not to allow some types of cookies. Click on the different category headings to find out more and change our default settings.',
       },
       necessary: {
         title: 'Strictly Necessary Cookies',
@@ -33,11 +34,9 @@ cookieMonster.init(
           cookieNames: ['_ga', '_gid', '_gat', '__utma', '__utmt', '__utmb', '__utmc', '__utmz', '__utmv', '_gat_gtag_UA_44786119_2'],
           blockScript: /gtag/,
           onAccept: function() {
-            console.log('aceptado')
             window['ga-disable-UA_44786119_2'] = false;
           },
           onRevoke: function() {
-            console.log('revocado')
             window['ga-disable-UA_44786119_2'] = true;
           },
         },
@@ -45,15 +44,16 @@ cookieMonster.init(
       social: {
         vimeo: {
           label: 'Vimeo',
+          cookieNames: ['vuid'],
           blockScript: /vimeo/,
         },
-        blocked: {
-          label: 'Local',
-          cookieNames: ['blocked'],
-          blockScript: /blocked/,
+      },
+      blocked: {
+        gec: {
+          label: 'Gec',
+          cookieNames: ['gec'],
         },
       },
     },
-    alertText: 'This website uses cookies to ensure you get the best experience on our website, to see what cookies are we using and the propuses go to "cookie settings". For more information, see our <a href="https://www.accenture.com/nl-en/company-cookies-similar-technology">Cookie Policy</a> and <a href="https://www.accenture.com/nl-en/privacy-policy">Privacy Policy</a>.',
   }
 );

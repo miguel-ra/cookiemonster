@@ -1,22 +1,17 @@
-# Perfectly simple Webpack 2 setup
+# COOKIEMONSTER
+🔐 Javascript solution to allow/block scripts, cookie creation and iframe execution to comply with GDPR
 
-    git clone --bare git@github.com:tb/perfectly-simple-webpack-starter.git client 
-    cd client
-    yarn
+## Features and configuration
+There are three different contents that can be blocked
 
-Run tests
+### Block local cookies
+...
 
-    yarn test
+### Block script tag
+...
 
-Start dev server
+### Block iframes
+...
 
-    yarn start
-
-Build production version
-
-    yarn build
-
-Upgrade packages
-
-    yarn upgrade-interactive
-# cookiemonster
+## Usage
+...

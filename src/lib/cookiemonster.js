@@ -12,11 +12,11 @@ export default function () {
   window.cookieMonster = { ...window.cookieMonster, ...events };
 }
 
-export function getTabCookie(tabs, savedCookie) {
+export function getTabCookie(tabs, savedCookie, defaultValue = true) {
   const cookie = savedCookie || {};
   Object.keys(tabs).forEach((key) => {
     if (tabs[key].cookie) {
-      cookie[key] = cookie && cookie[key] !== undefined ? cookie[key] : true;
+      cookie[key] = cookie && cookie[key] !== undefined ? cookie[key] : defaultValue;
     }
   });
   return cookie;
