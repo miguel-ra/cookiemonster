@@ -9,8 +9,8 @@ export default function (cookieServiceNames) {
 
   if (!cookieDescriptor) {
     cookieDescriptor = {};
-    cookieDescriptor.get = document.__lookupGetter__('cookie');
-    cookieDescriptor.set = document.__lookupSetter__('cookie');
+    cookieDescriptor.get = HTMLDocument.prototype.__lookupGetter__('cookie');
+    cookieDescriptor.set = HTMLDocument.prototype.__lookupSetter__('cookie');
   }
 
   Object.defineProperty(document, 'cookie', {

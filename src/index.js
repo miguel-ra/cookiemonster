@@ -14,11 +14,17 @@ jss.setup(preset());
 const defaultParams = {
   tabs: {},
   cookies: {},
-  blockedIframeText: 'This content is blocked because you didn\'t accept this specific cookie. If you want to see this content, please allow it.',
-  alertText: 'This website uses cookies to ensure you get the best experience on our website.',
-  moreInformation: 'Cookie settings',
-  acceptAll: 'Allow all cookies',
-  acceptOne: 'Allow',
+  texts: {
+    blockedContent: 'This content is blocked because you didn\'t accept this specific cookie. If you want to see this content, please allow it.',
+    banner: 'This website uses cookies to ensure you get the best experience on our website.',
+    cookieSettings: 'Cookie settings',
+    acceptAll: 'Allow all cookies',
+    acceptOne: 'Allow',
+    on: 'On',
+    off: 'Off',
+    save: 'Save',
+    close: 'Close',
+  },
 };
 
 
@@ -36,6 +42,10 @@ function cookieMonster(params) {
   const mergedParams = {
     ...defaultParams,
     ...params,
+    texts: {
+      ...defaultParams.texts,
+      ...params.texts,
+    },
     theme: new Styles(generateTheme(params.theme)),
   };
 
@@ -46,7 +56,7 @@ function cookieMonster(params) {
   cookiemonster();
 
   if (Object.keys(mergedParams.tabs).length === 0) {
-    mergedParams.moreInformation = false;
+    mergedParams.cookieSettings = false;
   }
 
   if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading') {

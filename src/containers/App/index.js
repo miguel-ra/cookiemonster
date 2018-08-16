@@ -115,11 +115,9 @@ class App extends Component {
       <div className={`cookiemonster ${classes.root}`}>
         { alert && (
           <c.CookieAlert
-            onMoreInformation={this.openConfig}
+            onCookieSettings={this.openConfig}
             onAcceptAll={this.saveCookie}
-            alertText={params.alertText}
-            moreInformation={params.moreInformation}
-            acceptAll={params.acceptAll}
+            texts={params.texts}
           />
         ) }
         { config && (
@@ -128,6 +126,7 @@ class App extends Component {
             config={cookiemonster}
             onClose={this.closeConfig}
             onSave={this.saveCookie}
+            texts={params.texts}
           />
         ) }
       </div>

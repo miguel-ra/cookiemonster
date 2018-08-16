@@ -24,12 +24,14 @@ class Switch extends Component {
   }
 
   render() {
-    const { active, sheet } = this.props;
+    const {
+      active, sheet, on, off,
+    } = this.props;
     const { classes } = sheet;
     return (
       <div className={classes.root}>
         <span className={classes.status}>
-          {active ? 'ON' : 'OFF'}
+          {active ? on : off}
         </span>
         <div
           className={classes.switch}

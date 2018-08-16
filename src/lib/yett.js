@@ -14,7 +14,7 @@ let blackListedScripts = [];
 
 let observer;
 
-export default function (blacklist, blacklistTypes, { tabs, blockedIframeText, acceptOne }) {
+export default function (blacklist, blacklistTypes, { tabs, texts: { blockedContent, acceptOne } }) {
   blacklistedTabs = tabs;
   blacklistedTypes = blacklistTypes;
   blacklistedPatterns = blacklist;
@@ -66,7 +66,7 @@ export default function (blacklist, blacklistTypes, { tabs, blockedIframeText, a
             {...fetchAttributes(iframeNode)}
             type={type}
             tab={blacklistedTabs[type]}
-            text={blockedIframeText}
+            text={blockedContent}
             button={acceptOne}
           />,
           container

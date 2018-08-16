@@ -45,56 +45,58 @@ class CookieConfig extends Component {
   render() {
     const { active, config } = this.state;
     const {
-      sheet: { classes }, onClose, onSave, tabs,
+      sheet: { classes }, onClose, onSave, tabs, texts,
     } = this.props;
     return (
       <div className={classes.root}>
         <div className={classes.content}>
           <div className={classes.heading}>
             <h2>
-              Cookie settings
+              {texts.cookieSettings}
             </h2>
           </div>
-        <div className={classes.innercontent}>
-          <div role='tablist' className={classes.left}>
-            {Object.keys(tabs).map((key) => {
-              const callback = this.changeTab(key);
-              return (
-                <div
-                  role='tab'
-                  tabIndex='0'
-                  onClick={this.changeTab(key)}
-                  onKeyPress={(e) => this.handleKeyPress(e, callback)}
-                  className={`${classes.tab} ${active === key ? 'active' : ''}`}
-                >
-                  {tabs[key].title}
-                </div>
-              );
-            })}
-          </div>
-          <div className={classes.right}>
-            <div className={classes.tabHeader}>
-              <h3>
-                {tabs[active].title}
-              </h3>
-              {tabs[active].cookie ? (
-                <c.Switch
-                  active={config[active]}
-                  callback={this.changeCookie(active)}
-                />
-              ) : false}
+          <div className={classes.innercontent}>
+            <div role='tablist' className={classes.left}>
+              {Object.keys(tabs).map((key) => {
+                const callback = this.changeTab(key);
+                return (
+                  <div
+                    role='tab'
+                    tabIndex='0'
+                    onClick={this.changeTab(key)}
+                    onKeyPress={(e) => this.handleKeyPress(e, callback)}
+                    className={`${classes.tab} ${active === key ? 'active' : ''}`}
+                  >
+                    {tabs[key].title}
+                  </div>
+                );
+              })}
             </div>
-            <div className={classes.tabContent}>
-              <Markup markup={tabs[active].description} />
+            <div className={classes.right}>
+              <div className={classes.tabHeader}>
+                <h3>
+                  {tabs[active].title}
+                </h3>
+                {tabs[active].cookie ? (
+                  <c.Switch
+                    active={config[active]}
+                    callback={this.changeCookie(active)}
+                    on={texts.on}
+                    off={texts.off}
+                  />
+                ) : false}
+              </div>
+              <div className={classes.tabContent}>
+                <Markup markup={tabs[active].description} />
+              </div>
             </div>
           </div>
-        </div>
           <div className={classes.footer}>
             <button type='button' onClick={onClose}>
-              Close
+              {texts.close}
             </button>
             <button type='button' onClick={() => onSave(config)} className='accent'>
-              Save
+              {texts.save}
             </button>
           </div>
         </div>

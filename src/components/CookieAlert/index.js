@@ -6,22 +6,22 @@ import Styles from '../../styles';
 import style from './style';
 
 function CookieAlert({
-  sheet, onMoreInformation, onAcceptAll, moreInformation, alertText, acceptAll,
+  sheet, onCookieSettings, onAcceptAll, texts,
 }) {
   const { classes } = sheet;
   return (
     <div className={classes.root}>
       <div className={classes.content}>
-        <Markup markup={alertText} />
+        <Markup markup={texts.banner} />
       </div>
       <div className={classes.buttons}>
-        {moreInformation && (
-          <button type='button' className={classes.button} onClick={onMoreInformation} tabIndex='0'>
-            {moreInformation}
+        {texts.cookieSettings && (
+          <button type='button' className={classes.button} onClick={onCookieSettings} tabIndex='0'>
+            {texts.cookieSettings}
           </button>
         )}
         <button type='button' className={`${classes.button} accent`} onClick={() => onAcceptAll()} tabIndex='0'>
-          {acceptAll}
+          {texts.acceptAll}
         </button>
       </div>
     </div>

@@ -31,7 +31,7 @@ cookieMonster.init(
       analytics: {
         analytics: {
           label: 'Analytical Cookies',
-          cookieNames: ['_ga', '_gid', '_gat', '__utma', '__utmt', '__utmb', '__utmc', '__utmz', '__utmv', '_gat_gtag_UA_44786119_2'],
+          // cookieNames: ['_ga', '_gid', '_gat', '__utma', '__utmt', '__utmb', '__utmc', '__utmz', '__utmv', '_gat_gtag_UA_44786119_2'],
           blockScript: /gtag/,
           onAccept: function() {
             window['ga-disable-UA_44786119_2'] = false;
@@ -54,6 +54,9 @@ cookieMonster.init(
           cookieNames: ['gec'],
         },
       },
+    },
+    texts: {
+      // cookieSettings: false,
     },
   }
 );
